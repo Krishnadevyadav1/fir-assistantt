@@ -64,6 +64,22 @@ LLM_TIMEOUT_MS=18000
 
 Do not upload the local `.env` file. The hosting platform supplies `PORT` automatically. In production, Express serves both the compiled React frontend and `/api` routes from the same domain.
 
+### Vercel
+
+The included `vercel.json` deploys the Vite frontend and Express API together. Import the GitHub repository into Vercel and use `fir-assistant` as the project name.
+
+Add these environment variables in **Project Settings → Environment Variables**:
+
+```text
+LLM_PROVIDER=gemini
+LLM_API_KEY=your_google_ai_studio_api_key
+LLM_MODEL=gemini-2.5-flash-lite
+LLM_FALLBACK_MODELS=gemini-2.5-flash
+LLM_TIMEOUT_MS=18000
+```
+
+Redeploy after adding or changing environment variables. The deployed health endpoint is `/api/health`.
+
 ## Notes
 
 The app is a decision-support tool, not legal advice. It uses the LLM to interpret complaint meaning, while the server supplies a compact reference set of Information Technology Act, 2000 and Bharatiya Nyaya Sanhita, 2023 provisions relevant to common cyber-crime complaints.

@@ -725,7 +725,18 @@ function App() {
         body: JSON.stringify({ complaint, language: selectedLanguage })
       });
 
-      const payload = await response.json();
+      const rawBody = await response.text();
+      let payload;
+
+      try {
+        payload = JSON.parse(rawBody);
+      } catch {
+        throw new Error(
+          response.status === 404
+            ? "The classification API is not available on this deployment. Check the hosting configuration."
+            : "The server returned an invalid response. Please try again shortly."
+        );
+      }
 
       if (!response.ok) {
         throw new Error(payload.error || "Unable to classify complaint.");

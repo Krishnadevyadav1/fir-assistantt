@@ -379,13 +379,17 @@ app.use("/api", (_req, res) => {
   res.status(404).json({ error: "API route not found." });
 });
 
-if (isProduction) {
+if (isProduction && !process.env.VERCEL) {
   app.use(express.static(distPath));
   app.get("*", (_req, res) => {
     res.sendFile(path.join(distPath, "index.html"));
   });
 }
 
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Server running on port ${port} in ${isProduction ? "production" : "development"} mode`);
-});
+if (!process.env.VERCEL) {
+  app.listen(port, "0.0.0.0", () => {
+    console.log(`Server running on port ${port} in ${isProduction ? "production" : "development"} mode`);
+  });
+}
+
+export default app;
