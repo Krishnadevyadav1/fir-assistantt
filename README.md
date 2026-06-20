@@ -39,6 +39,31 @@ npm run dev
 
 The React app runs on `http://127.0.0.1:5173` and the API runs on `http://127.0.0.1:3001`.
 
+## Production Hosting
+
+The project can be deployed as one Node web service on Render, Railway, or a similar host.
+
+Use these service commands:
+
+```text
+Build command: npm install && npm run build
+Start command: npm start
+Health check: /api/health
+```
+
+Configure these environment variables in the hosting dashboard:
+
+```text
+NODE_ENV=production
+LLM_PROVIDER=gemini
+LLM_API_KEY=your_google_ai_studio_api_key
+LLM_MODEL=gemini-2.5-flash-lite
+LLM_FALLBACK_MODELS=gemini-2.5-flash
+LLM_TIMEOUT_MS=18000
+```
+
+Do not upload the local `.env` file. The hosting platform supplies `PORT` automatically. In production, Express serves both the compiled React frontend and `/api` routes from the same domain.
+
 ## Notes
 
 The app is a decision-support tool, not legal advice. It uses the LLM to interpret complaint meaning, while the server supplies a compact reference set of Information Technology Act, 2000 and Bharatiya Nyaya Sanhita, 2023 provisions relevant to common cyber-crime complaints.

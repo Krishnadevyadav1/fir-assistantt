@@ -1,12 +1,23 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { legalKnowledge } from "./legalKnowledge.js";
 
 const app = express();
 const port = process.env.PORT || 3001;
+const isProduction = process.env.NODE_ENV === "production";
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
+const distPath = path.resolve(currentDir, "..", "dist");
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://127.0.0.1:5173" }));
+if (process.env.CLIENT_ORIGIN) {
+  const allowedOrigins = process.env.CLIENT_ORIGIN.split(",").map((origin) => origin.trim());
+  app.use(cors({ origin: allowedOrigins }));
+} else if (!isProduction) {
+  app.use(cors({ origin: "http://127.0.0.1:5173" }));
+}
+
 app.use(express.json({ limit: "1mb" }));
 
 const responseSchema = {
@@ -364,6 +375,17 @@ app.post("/api/classify", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`API server running on http://127.0.0.1:${port}`);
+app.use("/api", (_req, res) => {
+  res.status(404).json({ error: "API route not found." });
+});
+
+if (isProduction) {
+  app.use(express.static(distPath));
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
+
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port} in ${isProduction ? "production" : "development"} mode`);
 });
