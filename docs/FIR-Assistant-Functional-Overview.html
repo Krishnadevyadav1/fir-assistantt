@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FIR Assistant - Functional Overview</title>
+  <style>
+    @page { size: A4; margin: 16mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #172033; font: 10.5pt/1.48 Arial, sans-serif; background: #fff; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 8px; font-size: 28pt; line-height: 1.05; }
+    h2 { margin: 0 0 12px; color: #075e56; font-size: 18pt; border-bottom: 2px solid #d7e7e4; padding-bottom: 6px; }
+    h3 { margin: 0 0 5px; color: #123c38; font-size: 12pt; }
+    p { margin-bottom: 10px; }
+    ul, ol { margin: 7px 0 12px; padding-left: 20px; }
+    li { margin-bottom: 5px; }
+    .cover { min-height: 258mm; display: flex; flex-direction: column; justify-content: space-between; padding: 18mm 14mm; color: #fff; background: #061b1a; border-top: 8px solid #12cdb4; }
+    .cover-header { display: flex; align-items: center; gap: 15px; }
+    .logo { width: 78px; height: 78px; object-fit: contain; border-radius: 12px; padding: 7px; background: #fff; }
+    .agency { color: #d7e7e4; font-weight: bold; }
+    .cover-main { max-width: 570px; }
+    .cover h1 { color: #27e2c6; font-size: 42pt; }
+    .cover h2 { color: #fff; border: 0; font-size: 20pt; }
+    .cover p { color: #b7cbc6; font-size: 13pt; }
+    .cover-footer { display: flex; justify-content: space-between; gap: 20px; color: #8ea8a2; font-size: 9pt; }
+    .page { min-height: 258mm; page-break-before: always; }
+    .eyebrow { color: #a56f00; font-size: 8.5pt; font-weight: bold; letter-spacing: .08em; text-transform: uppercase; }
+    .lead { font-size: 12pt; color: #3e4b58; }
+    .callout { margin: 14px 0; border-left: 5px solid #0b8c7d; padding: 12px 15px; background: #edf8f6; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .card { break-inside: avoid; border: 1px solid #d8e0e7; border-radius: 6px; padding: 12px; background: #fbfcfd; }
+    .number { display: inline-grid; place-items: center; width: 25px; height: 25px; margin-bottom: 8px; border-radius: 50%; color: #fff; background: #08796d; font-weight: bold; }
+    .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 16px 0; }
+    .flow div { min-height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 5px; padding: 8px; color: #fff; background: #0b6e65; text-align: center; font-size: 9pt; font-weight: bold; }
+    .flow div:nth-child(even) { background: #174b67; }
+    .table { width: 100%; border-collapse: collapse; margin: 10px 0 15px; }
+    .table th, .table td { border: 1px solid #d8e0e7; padding: 8px; vertical-align: top; }
+    .table th { color: #fff; background: #0b6e65; text-align: left; }
+    .tag { display: inline-block; margin: 2px; border-radius: 20px; padding: 3px 8px; color: #075e56; background: #dff4ef; font-size: 8.5pt; font-weight: bold; }
+    .footer-note { margin-top: 18px; border-top: 1px solid #d8e0e7; padding-top: 9px; color: #697581; font-size: 8.5pt; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="cover-header">
+      <img class="logo" src="../src/assets/up-police-logo.png" alt="Uttar Pradesh Police logo" />
+      <div><strong>Amroha Police</strong><div class="agency">Uttar Pradesh Police</div></div>
+    </div>
+    <div class="cover-main">
+      <div class="eyebrow">AI Decision Support for Law Enforcement</div>
+      <h1>FIR Assistant</h1>
+      <h2>Functional Overview and Operational Workflow</h2>
+      <p>An AI-assisted cybercrime complaint classification tool that helps officers structure complaints, identify relevant legal provisions, plan evidence collection, and generate assessment reports.</p>
+    </div>
+    <div class="cover-footer"><span>Project Functionality Document</span><span>Prepared for law-enforcement use</span></div>
+  </section>
+
+  <section class="page">
+    <div class="eyebrow">01 / Project Overview</div>
+    <h2>Purpose of FIR Assistant</h2>
+    <p class="lead">FIR Assistant supports the initial assessment of cybercrime complaints received by police personnel. It converts an unstructured victim statement into a consistent, reviewable complaint analysis.</p>
+    <div class="callout"><strong>Primary objective:</strong> reduce the time required for preliminary complaint screening while helping officers identify offence categories, possible FIR provisions, missing facts, and relevant digital evidence.</div>
+    <h3>Target Users</h3>
+    <div class="grid">
+      <div class="card"><h3>Police Station Personnel</h3><p>For structured intake of walk-in, written, or digitally received cybercrime complaints.</p></div>
+      <div class="card"><h3>Cyber Cell Officers</h3><p>For preliminary legal mapping, evidence planning, and review before further action.</p></div>
+      <div class="card"><h3>Investigating Officers</h3><p>For quickly identifying missing facts and digital records that may require preservation.</p></div>
+      <div class="card"><h3>Supervisory Officers</h3><p>For reviewing a consistent summary and downloadable assessment report.</p></div>
+    </div>
+    <h3 style="margin-top:16px">Supported Complaint Types</h3>
+    <p>
+      <span class="tag">Financial fraud</span><span class="tag">Digital arrest scam</span>
+      <span class="tag">Phishing</span><span class="tag">Identity theft</span>
+      <span class="tag">Account takeover</span><span class="tag">Cyber stalking</span>
+      <span class="tag">Online threats</span><span class="tag">Data theft</span>
+      <span class="tag">Fake profiles</span><span class="tag">Intimate-image abuse</span>
+    </p>
+    <div class="footer-note">FIR Assistant is a decision-support tool. It does not replace the legal judgment of the authorised officer, prosecutor, magistrate, or court.</div>
+  </section>
+
+  <section class="page">
+    <div class="eyebrow">02 / Operational Workflow</div>
+    <h2>How the Application Works</h2>
+    <div class="flow">
+      <div>1. Enter Complaint</div><div>2. Select Language</div><div>3. AI Analysis</div><div>4. Review Sections</div><div>5. Download Report</div>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="number">1</div><h3>Complaint Intake</h3><p>The officer types or pastes the victim statement. Input validation requires a meaningful description and limits excessively long submissions.</p></div>
+      <div class="card"><div class="number">2</div><h3>Language Selection</h3><p>The officer selects English or Hindi. The complaint-entry interface and generated analysis/report follow the selected language.</p></div>
+      <div class="card"><div class="number">3</div><h3>Meaning-Based Classification</h3><p>The complaint is sent securely to the configured Gemini model. The model analyzes context and conduct rather than relying only on keywords.</p></div>
+      <div class="card"><div class="number">4</div><h3>Structured Legal Output</h3><p>The API returns validated JSON containing category, severity, confidence, legal suggestions, missing facts, evidence, and actions.</p></div>
+      <div class="card"><div class="number">5</div><h3>Officer Review</h3><p>The result is displayed as an operational report. Suggested sections can be reviewed against complete facts and current law.</p></div>
+      <div class="card"><div class="number">6</div><h3>Report Download</h3><p>A self-contained HTML report can be downloaded, opened in a browser, printed, or saved as a PDF for case documentation.</p></div>
+    </div>
+    <h3 style="margin-top:18px">User Feedback During Processing</h3>
+    <ul>
+      <li>Animated analysis state communicates that the AI request is in progress.</li>
+      <li>Offline detection disables classification and displays a clear connection message.</li>
+      <li>Invalid server responses are converted into understandable errors instead of technical parser messages.</li>
+      <li>Model fallback handles temporary demand or rate-limit failures.</li>
+    </ul>
+  </section>
+
+  <section class="page">
+    <div class="eyebrow">03 / Functional Modules</div>
+    <h2>Analysis Output</h2>
+    <table class="table">
+      <thead><tr><th>Module</th><th>Function</th><th>Operational Benefit</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Complaint Summary</strong></td><td>Creates a concise factual summary of the victim statement.</td><td>Speeds up review and briefing.</td></tr>
+        <tr><td><strong>Primary Category</strong></td><td>Identifies the most suitable cybercrime category and secondary categories.</td><td>Supports consistent complaint routing.</td></tr>
+        <tr><td><strong>Severity</strong></td><td>Returns Low, Medium, High, or Critical based on supplied facts.</td><td>Helps prioritize initial attention.</td></tr>
+        <tr><td><strong>Suggested FIR Sections</strong></td><td>Maps facts to relevant IT Act, 2000 and BNS, 2023 provisions with reasons.</td><td>Provides a starting point for legal review.</td></tr>
+        <tr><td><strong>Missing Facts</strong></td><td>Lists information required before final section selection.</td><td>Improves statement completeness.</td></tr>
+        <tr><td><strong>Evidence Checklist</strong></td><td>Suggests screenshots, transaction details, call records, links, devices, and other records.</td><td>Supports timely evidence preservation.</td></tr>
+        <tr><td><strong>Immediate Actions</strong></td><td>Provides practical first-response steps appropriate to the complaint.</td><td>Reduces delay in urgent cases.</td></tr>
+        <tr><td><strong>Downloadable Report</strong></td><td>Generates an English or Hindi assessment document.</td><td>Creates a portable review artifact.</td></tr>
+      </tbody>
+    </table>
+    <h3>Legal Knowledge Context</h3>
+    <p>The AI receives a curated legal reference covering commonly relevant provisions, including IT Act sections 43, 65, 66, 66B, 66C, 66D, 66E, 66F, 67, 67A, 67B, 70, 72, and 72A, together with commonly paired BNS provisions for cheating, personation, extortion, forgery, criminal intimidation, stalking, and related conduct.</p>
+  </section>
+
+  <section class="page">
+    <div class="eyebrow">04 / Technology and Safeguards</div>
+    <h2>System Architecture</h2>
+    <div class="grid">
+      <div class="card"><h3>React Frontend</h3><p>Responsive police-branded interface, language toggle, loading feedback, result presentation, and report generation.</p></div>
+      <div class="card"><h3>Node.js / Express API</h3><p>Validates complaints, protects API credentials, constructs prompts, handles model fallback, and returns structured results.</p></div>
+      <div class="card"><h3>Google Gemini</h3><p>Performs contextual complaint classification and generates legal decision-support content.</p></div>
+      <div class="card"><h3>Deployment</h3><p>Supports a single Node service on Render/Railway and serverless frontend/API deployment on Vercel.</p></div>
+    </div>
+    <h3 style="margin-top:18px">Reliability and Safety Controls</h3>
+    <ul>
+      <li>API keys remain server-side and are excluded from Git through <code>.gitignore</code>.</li>
+      <li>Strict structured-output schema reduces malformed AI responses.</li>
+      <li>Fallback models are used for temporary overload or malformed output.</li>
+      <li>Request timeout prevents the interface from waiting indefinitely.</li>
+      <li>Complaint length validation reduces accidental oversized requests.</li>
+      <li>Downloaded report content is HTML-escaped to prevent injected markup.</li>
+    </ul>
+    <h3>Important Operational Limitations</h3>
+    <div class="callout">AI confidence is a model self-estimate, not a calibrated probability. Suggested legal provisions must be checked against the complete complaint, available evidence, current statutory text, applicable judgments, and local procedure.</div>
+    <h3>Expected Law-Enforcement Impact</h3>
+    <ol>
+      <li>Faster preliminary screening of cybercrime complaints.</li>
+      <li>More consistent identification of complaint categories.</li>
+      <li>Earlier recognition of missing facts and digital evidence.</li>
+      <li>Better structured material for review by authorised officers.</li>
+      <li>Improved accessibility through English and Hindi support.</li>
+    </ol>
+    <div class="footer-note">FIR Assistant | Made by Krishna Dev Yadav and Rajan Prajapati</div>
+  </section>
+</body>
+</html>
