@@ -245,8 +245,8 @@ function Header({ onNavigate, activeSection, language }) {
           <img src={upPoliceLogo} alt="Uttar Pradesh Police logo" />
         </div>
         <div>
-          <span className="brand-name">Amroha Police</span>
-          <span className="brand-subtitle">Uttar Pradesh Police</span>
+          <span className="brand-name">FIR Assistant</span>
+          <span className="brand-subtitle">Amroha Police · Uttar Pradesh Police</span>
         </div>
       </button>
 
@@ -578,9 +578,8 @@ function HomePage({ onNavigate, setComplaint }) {
       <div className="hero-content">
         <div className="hero-copy">
           <span className="eyebrow light">AI Decision Support for Law Enforcement</span>
-          <h1>
-            Classify cyber complaints and suggest <span>FIR sections</span> fast
-          </h1>
+          <h1><span>FIR Assistant</span></h1>
+          <h2>Classify cyber complaints and suggest FIR sections fast</h2>
           <p>
             A field-ready intake console for UP Police officers to convert victim
             statements into cyber-crime categories, legal section suggestions, missing

@@ -1,4 +1,4 @@
-# AI Cyber Crime Complaint Classifier
+# FIR Assistant
 
 A React + Node web app that sends a cyber-crime complaint to an LLM API, classifies the complaint by meaning, and suggests Indian legal provisions that may help a police officer frame an FIR.
 
