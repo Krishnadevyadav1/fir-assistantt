@@ -66,7 +66,7 @@ Do not upload the local `.env` file. The hosting platform supplies `PORT` automa
 
 ### Vercel
 
-The included `vercel.json` deploys the Vite frontend and Express API together. Import the GitHub repository into Vercel and use `fir-assistant` as the project name.
+The included `vercel.json` deploys the Vite frontend with dedicated `/api/classify` and `/api/health` serverless functions. Import the GitHub repository into Vercel and use `fir-assistant` as the project name.
 
 Add these environment variables in **Project Settings → Environment Variables**:
 
